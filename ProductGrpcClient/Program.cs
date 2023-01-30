@@ -3,34 +3,15 @@
 Console.WriteLine("Server starting...");
 Thread.Sleep(2000);
 
-using GrpcChannel channel = GrpcChannel.ForAddress("https://localhost:7008");
-ProductProtoService.ProductProtoServiceClient? client = new(channel);
-
-//GetProductAsync
-Console.WriteLine("GetProductAsync started...");
-
-GetProductRequest product_request = new()
+HttpClientHandler httpHandler = new()
 {
-    ProductId = 7,
+    ServerCertificateCustomValidationCallback =
+        HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
 };
+using GrpcChannel channel = GrpcChannel.ForAddress("http://localhost:443",
+        new GrpcChannelOptions { HttpHandler = httpHandler });
 
-GetProductResponse get_product_response = await client.GetProductAsync(product_request);
-Console.WriteLine("GetProductAsync Response Success: " + get_product_response.Success.ToString());
-Console.WriteLine("GetProductAsync Response Model: " + get_product_response.ProductModel.ToString());
-
-
-//GetAllProductsAsync
-Console.WriteLine("GetAllProductsAsync started...");
-Thread.Sleep(2000);
-
-GetAllProductsRequest get_all_product_request = new GetAllProductsRequest();
-ProductModelListResponse get_all_products_response = client.GetAllProducts(get_all_product_request);
-Console.WriteLine("GetAllProductsAsync Response Success: " + get_all_products_response.Success.ToString());
-foreach (var item in get_all_products_response.ProductModelList)
-{
-    Console.WriteLine(item.ToString());
-}
-
+ProductProtoService.ProductProtoServiceClient? client = new(channel);
 
 //AddProductAsync
 Console.WriteLine("AddProductAsync started...");
@@ -55,6 +36,30 @@ AddProductResponse add_product_response = await client.AddProductAsync(add_produ
 Console.WriteLine("AddProductAsync Response Success: " + add_product_response.Success.ToString());
 Console.WriteLine("AddProductAsync Response Model: " + add_product_response.ProductModel.ToString());
 
+//GetProductAsync
+Console.WriteLine("GetProductAsync started...");
+
+GetProductRequest product_request = new()
+{
+    ProductId = 4,
+};
+
+GetProductResponse get_product_response = await client.GetProductAsync(product_request);
+Console.WriteLine("GetProductAsync Response Success: " + get_product_response.Success.ToString());
+Console.WriteLine("GetProductAsync Response Model: " + get_product_response.ProductModel.ToString());
+
+
+//GetAllProductsAsync
+Console.WriteLine("GetAllProductsAsync started...");
+Thread.Sleep(2000);
+
+GetAllProductsRequest get_all_product_request = new GetAllProductsRequest();
+ProductModelListResponse get_all_products_response = client.GetAllProducts(get_all_product_request);
+Console.WriteLine("GetAllProductsAsync Response Success: " + get_all_products_response.Success.ToString());
+foreach (var item in get_all_products_response.ProductModelList)
+{
+    Console.WriteLine(item.ToString());
+}
 
 //UpdateProductAsync
 Console.WriteLine("UpdateProductAsync started...");
@@ -85,7 +90,7 @@ Thread.Sleep(2000);
 
 DeleteProductRequest delete_product_request = new()
 {
-    ProductId = 7,
+    ProductId = 4,
 };
 
 DeleteProductResponse delete_product_response = await client.DeleteProductAsync(delete_product_request);
