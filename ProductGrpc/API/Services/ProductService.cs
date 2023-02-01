@@ -1,9 +1,4 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using Grpc.Core;
-using ProductGrpc.Mapping;
-using ProductGrpc.Protos;
-
-namespace ProductGrpc.Services
+﻿namespace ProductGrpc.API.Services
 {
     public class ProductService : ProductProtoService.ProductProtoServiceBase
     {
@@ -28,7 +23,7 @@ namespace ProductGrpc.Services
             {
                 throw new RpcException(new Status(StatusCode.NotFound, $"Product with ID={request.ProductId} is not found"));
             }
-                
+
             ProductModel product_model = product.MapToProductModel();
 
             GetProductResponse get_product_response = product_model is null

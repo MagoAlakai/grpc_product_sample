@@ -1,4 +1,4 @@
-﻿namespace ProductGrpc.Data
+﻿namespace ProductGrpc.Database
 {
     public class ProductsContext : DbContext
     {

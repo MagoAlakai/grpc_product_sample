@@ -1,6 +1,4 @@
-﻿using Google.Protobuf.WellKnownTypes;
-
-Console.WriteLine("Server starting...");
+﻿Console.WriteLine("Server starting...");
 Thread.Sleep(2000);
 
 HttpClientHandler httpHandler = new()
@@ -8,7 +6,7 @@ HttpClientHandler httpHandler = new()
     ServerCertificateCustomValidationCallback =
         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
 };
-using GrpcChannel channel = GrpcChannel.ForAddress("http://localhost:443",
+using GrpcChannel channel = GrpcChannel.ForAddress("https://localhost:443",
         new GrpcChannelOptions { HttpHandler = httpHandler });
 
 ProductProtoService.ProductProtoServiceClient? client = new(channel);

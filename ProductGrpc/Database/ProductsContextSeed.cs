@@ -1,4 +1,4 @@
-﻿namespace ProductGrpc.Data
+﻿namespace ProductGrpc.Database
 {
     public class ProductsContextSeed
     {
@@ -14,7 +14,7 @@
                         Name = "Mi10T",
                         Description = "New Xiamoi Phone Mi10T",
                         Price = 699,
-                        Status = ProductStatus.INSTOCK,
+                        Status = Models.ProductStatus.INSTOCK,
                         CreatedTime = DateTime.Now
                     },
                     new Product
@@ -23,7 +23,7 @@
                         Name = "P40",
                         Description = "New Huawei Phone P40",
                         Price = 899,
-                        Status = ProductStatus.INSTOCK,
+                        Status = Models.ProductStatus.INSTOCK,
                         CreatedTime = DateTime.Now
                     },
                     new Product
@@ -32,7 +32,7 @@
                         Name = "A50",
                         Description = "New Samsung Phone A50",
                         Price = 399,
-                        Status = ProductStatus.INSTOCK,
+                        Status = Models.ProductStatus.INSTOCK,
                         CreatedTime = DateTime.Now
                     }
                 };
