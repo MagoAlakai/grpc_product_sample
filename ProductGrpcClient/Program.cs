@@ -1,13 +1,19 @@
 ﻿Console.WriteLine("Server starting...");
 Thread.Sleep(2000);
 
-HttpClientHandler httpHandler = new()
+HttpClientHandler http_client_handler = new()
 {
-    ServerCertificateCustomValidationCallback =
-        HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    ClientCertificateOptions = ClientCertificateOption.Manual,
+    SslProtocols = SslProtocols.Tls12
 };
-using GrpcChannel channel = GrpcChannel.ForAddress("https://localhost:443",
-        new GrpcChannelOptions { HttpHandler = httpHandler });
+http_client_handler.UseUnsignedServerCertificateValidation();
+
+HttpClient http_client = new(http_client_handler);
+GrpcChannel channel = GrpcChannel.ForAddress("https://localhost:443", new()
+{
+    HttpClient = http_client
+});
+
 
 ProductProtoService.ProductProtoServiceClient? client = new(channel);
 
