@@ -6,10 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc(opt =>
-    opt.EnableDetailedErrors = true); 
+    opt.EnableDetailedErrors = true);
 
-builder.Services.AddDbContext<ProductsContext>(options =>
-    options.UseInMemoryDatabase("Products"));
+builder.Services.AddDbContext<ProductsContext>(options
+    => options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(ProductsContext))));
 
 var app = builder.Build();
 
