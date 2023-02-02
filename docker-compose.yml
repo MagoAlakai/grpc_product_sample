@@ -19,9 +19,9 @@ services:
     container_name: product.grpc.db
     restart: always
     expose:
-      - 5433
+      - 1433
     ports:
-      - 5433:5433
+      - 1433:1443
     environment:
       SA_PASSWORD: "Iloveswing77!"
       ACCEPT_EULA: "Y"
