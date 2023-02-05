@@ -15,13 +15,13 @@ services:
     - 443:443
 
   product.grpc.db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: product.grpc.db
     restart: always
     expose:
-      - 1433
+      - 14033
     ports:
-      - 1433:1433
+      - 14033:1433
     environment:
       SA_PASSWORD: "Iloveswing77!"
       ACCEPT_EULA: "Y"
