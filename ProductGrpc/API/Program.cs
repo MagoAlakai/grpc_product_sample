@@ -1,34 +1,24 @@
-using Microsoft.AspNetCore.Server.Kestrel.Core;
-using ProductGrpc.API.Services;
 
-var builder = WebApplication.CreateBuilder(args);
-// Additional configuration is required to successfully run gRPC on macOS.
-// For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // todo (mago||06-01-2023): Create the README file with the whastup info and Identity-svc one
-
 
 // Add services to the container.
 builder.Services.AddGrpc(opt =>
     opt.EnableDetailedErrors = true);
 
-builder.Services.AddDbContext<ProductsContext>(options
-    => options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(ProductsContext))));
+builder.Services.AddDbContext<ProductsContext>(options => {
+    string? connection_str = builder.Configuration.GetConnectionString(nameof(ProductsContext));
+    ArgumentNullException.ThrowIfNull(connection_str);
+    Console.WriteLine(connection_str);
+    options.UseSqlServer(connection_str);
+});
 
-var app = builder.Build();
-
-//SeedDatabase(app);
-
-//static void SeedDatabase(IHost host)
-//{
-//    using IServiceScope scope = host.Services.CreateScope();
-//    IServiceProvider services = scope.ServiceProvider;
-//    ProductsContext productsContext = services.GetRequiredService<ProductsContext>();
-//    ProductsContextSeed.SeedAsync(productsContext);
-//}
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.MapGrpcService<ProductService>();
 app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
 
+app.SeedDatabase();
 app.Run();

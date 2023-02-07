@@ -2,8 +2,9 @@
 global using Grpc.Core;
 global using Mapster;
 global using Microsoft.EntityFrameworkCore;
+global using ProductGrpc.API.Services;
 global using ProductGrpc.Database;
+global using ProductGrpc.Extensions;
 global using ProductGrpc.Mapping;
 global using ProductGrpc.Models;
 global using ProductGrpc.Protos;
-
