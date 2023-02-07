@@ -8,7 +8,7 @@ public static class HttpClientHandlerExtensions
     /// <param name="handler"></param>
     public static void UseUnsignedServerCertificateValidation(this HttpClientHandler handler)
     {
-        X509Certificate2 value = new("C:\\Users\\JoseFarfan\\source\\repos\\MagoAlakai\\grpc_product_sample\\ProductGrpcClient\\Certificates\\tienda-svc.crt", "tienda-svc");
+        X509Certificate2 value = new("C:\\Users\\JoseFarfan\\source\\repos\\MagoAlakai\\grpc_product_sample\\ProductGrpcClient\\Certificates\\productgrpc.crt", "productgrpc");
         handler.ClientCertificates.Add(value);
         handler.ServerCertificateCustomValidationCallback = delegate (HttpRequestMessage sender, X509Certificate2? certificate, X509Chain? chain, SslPolicyErrors ssl_policy_errors)
         {

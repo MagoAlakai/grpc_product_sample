@@ -5,12 +5,17 @@ var builder = WebApplication.CreateBuilder(args);
 // Additional configuration is required to successfully run gRPC on macOS.
 // For instructions on how to configure Kestrel and gRPC clients on macOS, visit https://go.microsoft.com/fwlink/?linkid=2099682
 
+// todo (mago||06-01-2023): Create the README file with the whastup info and Identity-svc one
+
+
 // Add services to the container.
 builder.Services.AddGrpc(opt =>
     opt.EnableDetailedErrors = true);
 
 builder.Services.AddDbContext<ProductsContext>(options
-    => options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(ProductsContext))));
+    => ?
+    options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(ProductsContext)))
+    ){ };
 
 var app = builder.Build();
 

@@ -4,22 +4,23 @@ services:
 
   productgrpc:
     image: ${DOCKER_REGISTRY-}productgrpc
+    container_name: productgrpc
     build:
       context: .
       dockerfile: ProductGrpc/Dockerfile
     expose:
-    - 443
+    - 53443
     ports:
-    - 443:443
+    - 53443:53443
 
   product.grpc.db:
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: product.grpc.db
     restart: always
     expose:
-      - 14033
+      - 1433
     ports:
-      - 14033:1433
+      - 1433:1433
     environment:
       SA_PASSWORD: "Iloveswing77!"
       ACCEPT_EULA: "Y"
