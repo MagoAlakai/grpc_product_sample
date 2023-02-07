@@ -13,9 +13,7 @@ builder.Services.AddGrpc(opt =>
     opt.EnableDetailedErrors = true);
 
 builder.Services.AddDbContext<ProductsContext>(options
-    => ?
-    options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(ProductsContext)))
-    ){ };
+    => options.UseSqlServer(builder.Configuration.GetConnectionString(nameof(ProductsContext))));
 
 var app = builder.Build();
 
