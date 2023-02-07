@@ -15,5 +15,6 @@ services:
       - 1433:1443
     environment:
       SA_PASSWORD: "xz32NNgr45!"
+      MSSQL_SA_PASSWORD: "xz32NNgr45!"
       ACCEPT_EULA: "Y"
       MSSQL_PID: "Express"
