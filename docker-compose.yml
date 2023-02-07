@@ -2,9 +2,9 @@ version: '3.4'
 
 services:
 
-  productgrpc:
-    image: ${DOCKER_REGISTRY-}productgrpc
-    container_name: productgrpc
+  productgrpc.internal.local:
+    image: ${DOCKER_REGISTRY-}productgrpcinternallocal
+    container_name: productgrpc.internal.local
     build:
       context: .
       dockerfile: ProductGrpc/Dockerfile

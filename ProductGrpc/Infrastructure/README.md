@@ -26,9 +26,8 @@ $env:path = $env:path + ";C:\Program Files\OpenSSL-Win64\bin"
 ## Create Certificate Request (*.csr) and Encrypted Private Key (*.key) // note: we could create our root before hand. CSR: Certificate Signing Request
 
 ```bash
-openssl req -new -out productgrpc.internal.local.csr -keyout productgrpc.key \
-  -subj '/CN=productgrpc' -extensions EXT -config <( \
-   printf "[dn]\nCN=productgrpc.internal.local\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:productgrpc.internal.local\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
+openssl req -new -out productgrpc.internal.local.csr -keyout productgrpc.internal.local.key \-subj '/CN=productgrpc.internal.local' -extensions EXT -config <( \
+  printf "[dn]\nCN=productgrpc.internal.local\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:productgrpc.internal.local\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 ```
 
 ### PEM Pass Phrase: productgrpc.internal.local
@@ -36,7 +35,6 @@ openssl req -new -out productgrpc.internal.local.csr -keyout productgrpc.key \
 ### Two files generated is the `*.csr` and `*.key`
 CSR: Certificate Signing Request
 Next step is to "self-sign" our certificate signing request
-
 
 
 ## Use the *.key file to create the mathmatically linked Unencrypted RSA Private Key (*.pem), to "self-sign" our certificate signing request(.csr)
@@ -90,6 +88,11 @@ OR
 openssl pkcs12 -in productgrpc.internal.local.pfx -nodes -passin pass:%1 | openssl x509 -noout -fingerprint
 ```
 
+## Check if the server is running
+
+```bash
+openssl s_client -showcerts -connect productgrpc.internal.local:53445
+```
 
 ## Sample appsettings-json entry for Kestrel HTTP2
 

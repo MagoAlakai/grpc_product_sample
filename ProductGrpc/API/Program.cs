@@ -1,8 +1,6 @@
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// todo (mago||06-01-2023): Create the README file with the whastup info and Identity-svc one
-
 // Add services to the container.
 builder.Services.AddGrpc(opt =>
     opt.EnableDetailedErrors = true);
