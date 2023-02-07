@@ -11,5 +11,4 @@ public static class DefaultStaticMappingRules
         TypeAdapterConfig<DateTime, Timestamp>.ForType().MapWith(src => Timestamp.FromDateTime(src.ToUniversalTime()));
         TypeAdapterConfig<DateTime?, Timestamp>.ForType().MapWith(src => Timestamp.FromDateTime((src ?? DateTime.MinValue).ToUniversalTime()));
     }
-
 }

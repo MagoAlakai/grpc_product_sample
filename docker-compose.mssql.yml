@@ -1,0 +1,19 @@
+version: '3.9'
+
+## docker-compose -p mssql-stack -f docker-compose.mssql.yml down
+## docker-compose -p mssql-stack -f docker-compose.mssql.yml up -d
+
+services:
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql
+    restart: always
+    expose:
+      - 1433
+    ports:
+      - 1433:1443
+    environment:
+      SA_PASSWORD: "xz32NNgr45!"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
