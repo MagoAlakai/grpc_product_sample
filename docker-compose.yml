@@ -9,20 +9,22 @@ services:
       context: .
       dockerfile: ProductGrpc/Dockerfile
     expose:
-    - 53443
+    - 443
     ports:
-    - 53443:53443
+    - 443:443
 
   product.grpc.db:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: postgres
     container_name: product.grpc.db
     restart: always
     expose:
-      - 1433
+      - 5438
     ports:
-      - 1433:1433
+      - 5438:5438
     environment:
-      SA_PASSWORD: "Iloveswing77!"
-      ACCEPT_EULA: "Y"
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DATABASE: products
+      PGPORT: 5438
 
      

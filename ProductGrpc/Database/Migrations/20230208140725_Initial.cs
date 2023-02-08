@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -14,13 +16,13 @@ namespace ProductGrpc.Migrations
                 name: "Product",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
                     Price = table.Column<float>(type: "real", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    CreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Status = table.Column<int>(type: "integer", nullable: false),
+                    CreatedTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -12,7 +12,7 @@ public static class WebApplicationExtensions
         using IServiceScope scope = app.Services.CreateScope();
         IServiceProvider services = scope.ServiceProvider;
         ProductsContext products_context = services.GetRequiredService<ProductsContext>();
-        products_context.SeedAsync();
+        //products_context.SeedAsync();
         return app;
     }
 }

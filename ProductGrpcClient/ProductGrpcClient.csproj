@@ -24,8 +24,4 @@
 		</Protobuf>
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="Certificates\" />
-	</ItemGroup>
-
 </Project>

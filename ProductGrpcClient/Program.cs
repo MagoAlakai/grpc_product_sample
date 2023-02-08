@@ -9,7 +9,7 @@ HttpClientHandler http_client_handler = new()
 http_client_handler.UseUnsignedServerCertificateValidation();
 
 HttpClient http_client = new(http_client_handler);
-GrpcChannel channel = GrpcChannel.ForAddress("https://productgrpc.internal.local:53443", new()
+GrpcChannel channel = GrpcChannel.ForAddress("https://productgrpc.internal.local:443", new()
 {
     HttpClient = http_client
 });

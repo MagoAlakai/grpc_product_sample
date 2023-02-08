@@ -26,7 +26,8 @@ $env:path = $env:path + ";C:\Program Files\OpenSSL-Win64\bin"
 ## Create Certificate Request (*.csr) and Encrypted Private Key (*.key) // note: we could create our root before hand. CSR: Certificate Signing Request
 
 ```bash
-openssl req -new -out productgrpc.internal.local.csr -keyout productgrpc.internal.local.key \-subj '/CN=productgrpc.internal.local' -extensions EXT -config <( \
+openssl req -new -out productgrpc.internal.local.csr -keyout productgrpc.internal.local.key \
+  -subj '/CN=productgrpc.internal.local' -extensions EXT -config <( \
   printf "[dn]\nCN=productgrpc.internal.local\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:productgrpc.internal.local\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
 ```
 
