@@ -9,9 +9,9 @@ services:
       context: .
       dockerfile: ProductGrpc/Dockerfile
     expose:
-    - 443
+    - 53441
     ports:
-    - 443:443
+    - 53441:53441
 
   product.grpc.db:
     image: postgres
